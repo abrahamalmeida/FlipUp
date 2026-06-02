@@ -48,3 +48,64 @@ body {
     max-width: 620px;
     box-shadow: var(--shadow-lg);
 }
+
+.form-group { margin-bottom: 28px; }
+.form-group > label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 0.95rem; }
+
+select, input[type="text"] {
+    width: 100%;
+    padding: 14px 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+}
+select:focus, input[type="text"]:focus { border-color: var(--accent); background: #ffffff; box-shadow: 0 0 0 4px var(--accent-soft); }
+
+.row-inputs { display: flex; gap: 16px; }
+.input-field { flex: 1; }
+
+.radio-cards-group { display: flex; gap: 12px; }
+.radio-card { flex: 1; cursor: pointer; }
+.radio-card input { display: none; }
+.card-box {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.radio-card input:checked + .card-box {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    transform: translateY(-2px);
+}
+.card-box .title { font-weight: 800; font-size: 1.05rem; color: #334155; }
+.card-box .desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+.theme-selector-grid { display: flex; gap: 12px; }
+.theme-btn {
+    flex: 1; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md); color: #475569; font-family: var(--font-main);
+    font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: var(--transition-smooth);
+}
+.theme-btn.active {
+    border-color: var(--accent); background: var(--accent); color: white;
+    box-shadow: 0 8px 16px -8px var(--accent); transform: translateY(-1px);
+}
+
+.btn-primary {
+    width: 100%; padding: 16px; background: var(--accent); color: white;
+    border: none; border-radius: var(--radius-md); font-family: var(--font-main);
+    font-size: 1.1rem; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: var(--transition-smooth);
+}
+.btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); filter: brightness(0.95); }
