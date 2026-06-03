@@ -18,6 +18,17 @@
     --card-back: linear-gradient(135deg, #fef9c3, #eab308);
 }
 
+.theme-animales {
+    --accent: #16a34a;
+    --accent-soft: rgba(22,163,74,0.08);
+    --card-back: linear-gradient(135deg, #dcfce7, #86efac);
+}
+.theme-memes {
+    --accent: #db2777;
+    --accent-soft: rgba(219,39,119,0.08);
+    --card-back: linear-gradient(135deg, #fce7f3, #f9a8d4);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
