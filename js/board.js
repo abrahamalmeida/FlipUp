@@ -16,6 +16,7 @@ window.board = {
             card.className = 'card';
             card.setAttribute('data-icon', icon);
             card.innerHTML = `<div class="card-inner"><div class="card-back"></div><div class="card-front"><span class="icon-render">${icon}</span></div></div>`;
+            card.addEventListener('click', () => window.game.handleCardClick(card));
             boardElement.appendChild(card);
         });
     }
