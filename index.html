@@ -68,6 +68,30 @@
         </section>
 
         <section class="view-section hidden" id="screen-game">
+            <div class="dashboard-panel">
+                <div class="dash-left">
+                    <button class="btn-secondary" id="btn-quit">⬅ Salir</button>
+                    <div class="player-badge active" id="badge-p1">
+                        <span class="p-name" id="dash-name-p1">Jugador 1</span>
+                        <span class="p-score" id="dash-score-p1">Pares: 0</span>
+                    </div>
+                    <div class="player-badge hidden" id="badge-p2">
+                        <span class="p-name" id="dash-name-p2">Jugador 2</span>
+                        <span class="p-score" id="dash-score-p2">Pares: 0</span>
+                    </div>
+                </div>
+                <div class="dash-right">
+                    <div class="stat-indicator" id="stat-timer-box">
+                        <span class="label" id="timer-label">Tiempo</span>
+                        <span class="val" id="dash-timer">00:00</span>
+                    </div>
+                    <div class="stat-indicator">
+                        <span class="label">Intentos</span>
+                        <span class="val" id="dash-moves">0</span>
+                    </div>
+                    <button class="btn-icon-reset" id="btn-reset" title="Reiniciar Tablero">🔄</button>
+                </div>
+            </div>
             <div class="board-wrapper">
                 <div class="board" id="game-board"></div>
             </div>
@@ -77,6 +101,7 @@
     <script src="js/themes.js"></script>
     <script src="js/timer.js"></script>
     <script src="js/modes.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/board.js"></script>
     <script src="js/game.js"></script>
     <script src="js/menu.js"></script>

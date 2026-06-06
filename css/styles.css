@@ -120,6 +120,39 @@ select:focus, input[type="text"]:focus { border-color: var(--accent); background
 .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); }
 .btn-primary:active { transform: translateY(0); filter: brightness(0.95); }
 
+.btn-secondary {
+    padding: 10px 18px; background: #ffffff; border: 1px solid #e2e8f0; color: #475569;
+    font-weight: 700; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-main);
+    transition: var(--transition-smooth);
+}
+.btn-secondary:hover { border-color: #cbd5e1; background: #f8fafc; }
+
+.dashboard-panel {
+    width: 100%; background: var(--panel-bg); border: 1px solid #e2e8f0;
+    padding: 16px 24px; border-radius: var(--radius-lg); display: flex;
+    justify-content: space-between; align-items: center; margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
+}
+.dash-left, .dash-right { display: flex; align-items: center; gap: 16px; }
+
+.player-badge {
+    padding: 8px 18px; background: #f8fafc; border: 1px solid #e2e8f0;
+    border-radius: 40px; display: flex; gap: 10px; transition: var(--transition-smooth); color: #475569;
+}
+.player-badge.active { border-color: var(--accent); background: var(--accent); color: white; }
+.player-badge .p-name { font-weight: 800; }
+.player-badge .p-score { font-size: 0.9rem; font-weight: 600; }
+
+.stat-indicator { display: flex; flex-direction: column; align-items: flex-end; }
+.stat-indicator .label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+.stat-indicator .val { font-size: 1.4rem; font-weight: 800; color: var(--text-main); }
+
+.btn-icon-reset {
+    background: #f8fafc; border: 1px solid #e2e8f0; padding: 8px; border-radius: 50%;
+    font-size: 1.2rem; cursor: pointer; transition: var(--transition-smooth);
+}
+.btn-icon-reset:hover { transform: rotate(180deg); border-color: #cbd5e1; background: #f1f5f9; }
+
 .board-wrapper {
     display: flex; justify-content: center; align-items: center;
     background: var(--panel-bg); border: 1px solid #e2e8f0;

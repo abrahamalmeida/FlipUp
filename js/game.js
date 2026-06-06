@@ -18,6 +18,7 @@ window.game = {
         const state = window.gameState;
         state.boardLocked = true;
         state.movesCount++;
+        window.dashboard.updateCounters();
         const icon1 = state.firstCardSelected.querySelector('.icon-render').innerText;
         const icon2 = state.secondCardSelected.querySelector('.icon-render').innerText;
         if (icon1 === icon2) {
