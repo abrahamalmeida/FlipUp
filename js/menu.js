@@ -14,7 +14,8 @@ window.menu = {
             btn.addEventListener('click', () => {
                 themeButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                // La función de cambio de tema se añadirá después
+                const selectedTheme = btn.getAttribute('data-theme');
+                window.themes.applyTheme(selectedTheme);
             });
         });
 
@@ -24,8 +25,19 @@ window.menu = {
             window.gameState.difficulty = document.querySelector('input[name="difficulty"]:checked').value;
             window.gameState.player1Name = document.getElementById('input-p1').value.trim() || 'Jugador 1';
             window.gameState.player2Name = document.getElementById('input-p2').value.trim() || 'Jugador 2';
-            // Se conectará con el tablero en commits siguientes
+
+            this.switchScreenToGame();
+            window.modes.setupModeRules();
+            window.board.generate();
         });
+    },
+    switchScreenToGame() {
+        document.getElementById('screen-menu').classList.add('hidden');
+        document.getElementById('screen-game').classList.remove('hidden');
+    },
+    switchScreenToMenu() {
+        document.getElementById('screen-game').classList.add('hidden');
+        document.getElementById('screen-menu').classList.remove('hidden');
     }
 };
 document.addEventListener('DOMContentLoaded', () => window.menu.init());
