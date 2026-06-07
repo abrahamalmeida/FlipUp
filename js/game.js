@@ -34,8 +34,15 @@ window.game = {
         state.pairsFound++;
         state.currentStreak++;
         state.currentFailStreak = 0;
+
+        if (state.mode === 'pvp') {
+            if (state.activeTurn === 1) state.p1Pairs++;
+            else state.p2Pairs++;
+        }
+
         this.clearSelection();
         state.boardLocked = false;
+
         if (state.pairsFound === state.totalPairsInBoard) {
             // End game (se conectará después)
         }
@@ -51,6 +58,7 @@ window.game = {
             state.firstCardSelected.classList.remove('flipped', 'incorrect');
             state.secondCardSelected.classList.remove('flipped', 'incorrect');
             this.clearSelection();
+            window.modes.switchTurn();
             state.boardLocked = false;
         }, 1200);
     },
