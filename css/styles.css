@@ -182,3 +182,28 @@ select:focus, input[type="text"]:focus { border-color: var(--accent); background
 .card-back::after { content: '?'; font-size: 2.2rem; font-weight: 900; color: rgba(15,23,42,0.4); }
 .card-front { background: #ffffff; transform: rotateY(180deg); }
 .icon-render { font-size: 2.5rem; }
+
+.game-layout { width: 100%; display: grid; grid-template-columns: 1fr 280px; gap: 24px; }
+.achievements-sidebar {
+    background: var(--panel-bg); border: 1px solid #e2e8f0;
+    border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-md);
+}
+.achievements-sidebar h3 { font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 14px; }
+.achievements-sidebar ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.sidebar-ach-item {
+    padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md); font-size: 0.85rem; animation: slideIn 0.3s ease;
+}
+.sidebar-ach-item .title { font-weight: 800; color: var(--accent); display: block; margin-bottom: 2px; }
+.toast-container { position: fixed; top: 24px; right: 24px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; }
+.toast {
+    background: #ffffff; border: 1px solid #e2e8f0; box-shadow: var(--shadow-lg);
+    padding: 16px; border-radius: var(--radius-md); color: var(--text-main);
+    display: flex; align-items: center; gap: 14px; min-width: 300px;
+    animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.toast .icon { font-size: 2rem; }
+.toast .content h5 { font-weight: 900; font-size: 1rem; color: var(--accent); }
+.toast .content p { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+@keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes toastIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
