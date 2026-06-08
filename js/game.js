@@ -5,6 +5,7 @@ window.game = {
         if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
         if (card === state.firstCardSelected) return;
 
+        window.audioFX.playFlip();
         card.classList.add('flipped');
 
         if (!state.firstCardSelected) {
@@ -22,31 +23,29 @@ window.game = {
         const icon1 = state.firstCardSelected.querySelector('.icon-render').innerText;
         const icon2 = state.secondCardSelected.querySelector('.icon-render').innerText;
         if (icon1 === icon2) {
-            this.processMatch();
+            this.processMatch(icon1);
         } else {
             this.processMismatch();
         }
         window.achievements.checkDuringGame(icon1);
     },
-    processMatch() {
+    processMatch(matchedIcon) {
         const state = window.gameState;
         state.firstCardSelected.classList.add('matched');
         state.secondCardSelected.classList.add('matched');
         state.pairsFound++;
         state.currentStreak++;
         state.currentFailStreak = 0;
-
+        window.audioFX.playMatch();
         if (state.mode === 'pvp') {
             if (state.activeTurn === 1) state.p1Pairs++;
             else state.p2Pairs++;
         }
-
         this.clearSelection();
         state.boardLocked = false;
-
         if (state.pairsFound === state.totalPairsInBoard) {
             window.timer.clearInterval();
-            setTimeout(() => { window.endScreen.show(); }, 600);
+            setTimeout(() => { window.audioFX.playVictory(); window.endScreen.show(); }, 600);
         }
     },
     processMismatch() {
@@ -56,6 +55,7 @@ window.game = {
         state.currentFailStreak++;
         state.firstCardSelected.classList.add('incorrect');
         state.secondCardSelected.classList.add('incorrect');
+        window.audioFX.playError();
         setTimeout(() => {
             state.firstCardSelected.classList.remove('flipped', 'incorrect');
             state.secondCardSelected.classList.remove('flipped', 'incorrect');

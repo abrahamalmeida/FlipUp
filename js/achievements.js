@@ -15,6 +15,7 @@ window.achievements = {
         'cold_streak': { title: 'Cold streak', desc: '5 fallos consecutivos.', icon: '🧊' },
         'observador': { title: 'Observador', desc: '<2 reinicios en la partida.', icon: '🔍' }
     },
+
     checkDuringGame(matchedIcon) {
         const state = window.gameState;
         if (state.pairsFound === 1 && !state.unlockedAchievements.has('first_step')) this.unlock('first_step');
@@ -24,6 +25,7 @@ window.achievements = {
         if (state.currentStreak === 10 && !state.unlockedAchievements.has('rey_tablero')) this.unlock('rey_tablero');
         if (state.currentFailStreak === 5 && !state.unlockedAchievements.has('cold_streak')) this.unlock('cold_streak');
     },
+
     checkAtEnd() {
         const state = window.gameState;
         if (state.difficulty === 'easy' && state.mode === 'solitario' && !state.timedOut && state.timeSeconds < 30 && !state.unlockedAchievements.has('speedster')) this.unlock('speedster');
@@ -38,6 +40,7 @@ window.achievements = {
         if (state.currentTheme === 'memes' && !state.unlockedAchievements.has('meme_lord')) this.unlock('meme_lord');
         if (state.resetCount < 2 && !state.unlockedAchievements.has('observador')) this.unlock('observador');
     },
+
     unlock(id) {
         if (window.gameState.unlockedAchievements.has(id)) return;
         window.gameState.unlockedAchievements.add(id);
@@ -50,7 +53,11 @@ window.achievements = {
             li.innerHTML = `<span class="title">${ach.icon} ${ach.title}</span>${ach.desc}`;
             sidebarList.appendChild(li);
         }
+        if (id === 'messi') {
+            window.audioFX.playGoat();
+        }
     },
+
     showToast(ach) {
         const container = document.getElementById('achievement-toast-container');
         if (!container) return;
@@ -60,6 +67,7 @@ window.achievements = {
         container.appendChild(toast);
         setTimeout(() => { toast.remove(); }, 4000);
     },
+
     resetSession() {
         window.gameState.unlockedAchievements.clear();
         document.getElementById('sidebar-achievements-list').innerHTML = '';
