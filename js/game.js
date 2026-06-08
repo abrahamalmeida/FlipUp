@@ -19,7 +19,6 @@ window.game = {
         state.boardLocked = true;
         state.movesCount++;
         window.dashboard.updateCounters();
-        window.achievements.checkDuringGame(icon1);
         const icon1 = state.firstCardSelected.querySelector('.icon-render').innerText;
         const icon2 = state.secondCardSelected.querySelector('.icon-render').innerText;
         if (icon1 === icon2) {
@@ -27,6 +26,7 @@ window.game = {
         } else {
             this.processMismatch();
         }
+        window.achievements.checkDuringGame(icon1);
     },
     processMatch() {
         const state = window.gameState;
@@ -45,7 +45,8 @@ window.game = {
         state.boardLocked = false;
 
         if (state.pairsFound === state.totalPairsInBoard) {
-            // End game (se conectará después)
+            window.timer.clearInterval();
+            setTimeout(() => { window.endScreen.show(); }, 600);
         }
     },
     processMismatch() {

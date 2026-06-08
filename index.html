@@ -92,12 +92,7 @@
                     <button class="btn-icon-reset" id="btn-reset" title="Reiniciar Tablero">🔄</button>
                 </div>
             </div>
-            <div class="board-wrapper">
-                <div class="board" id="game-board"></div>
-            </div>
-        </section>
-          <section class="view-section hidden" id="screen-game">
-            <div class="dashboard-panel">...</div>
+
             <div class="game-layout">
                 <div class="board-wrapper">
                     <div class="board" id="game-board"></div>
@@ -108,8 +103,30 @@
                 </aside>
             </div>
         </section>
+
+        <div class="modal-overlay hidden" id="screen-end">
+            <div class="modal-card">
+                <h2 id="end-title">¡Fin de la Partida!</h2>
+                <p class="winner-announcement" id="end-subtitle"></p>
+                <div class="stats-summary-grid">
+                    <div class="summary-item"><span class="val" id="end-stat-moves">0</span><span class="label">Intentos</span></div>
+                    <div class="summary-item" id="end-box-time"><span class="val" id="end-stat-time">00:00</span><span class="label">Tiempo</span></div>
+                    <div class="summary-item"><span class="val" id="end-stat-accuracy">0%</span><span class="label">Precisión</span></div>
+                </div>
+                <div class="end-achievements-section">
+                    <h4>Medallas Conseguidas</h4>
+                    <div class="badges-row" id="end-achievements-container"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" id="btn-home">Menú Principal</button>
+                    <button class="btn-primary" id="btn-replay">Volver a Jugar</button>
+                </div>
+            </div>
+        </div>
     </main>
+
     <div class="toast-container" id="achievement-toast-container"></div>
+
     <script src="js/app.js"></script>
     <script src="js/themes.js"></script>
     <script src="js/timer.js"></script>
@@ -117,6 +134,8 @@
     <script src="js/dashboard.js"></script>
     <script src="js/board.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/endScreen.js"></script>
     <script src="js/menu.js"></script>
 </body>
 </html>
