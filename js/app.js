@@ -25,3 +25,32 @@ window.gameState = {
     timedOut: false,
     resetCount: 0
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    window.menu.init();
+
+    document.getElementById('btn-quit').addEventListener('click', () => {
+        window.timer.clearInterval();
+        window.menu.switchScreenToMenu();
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+        window.gameState.resetCount++;
+        window.timer.clearInterval();
+        window.modes.setupModeRules();
+        window.board.generate();
+        window.board.startPeek();
+    });
+
+    document.getElementById('btn-home').addEventListener('click', () => {
+        window.menu.switchScreenToMenu();
+    });
+
+    document.getElementById('btn-replay').addEventListener('click', () => {
+        window.gameState.resetCount++;
+        window.endScreen.hide();
+        window.modes.setupModeRules();
+        window.board.generate();
+        window.board.startPeek();
+    });
+});

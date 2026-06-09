@@ -3,7 +3,9 @@ window.audioFX = {
     goatAudio: null,
 
     init() {
-        if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
     },
 
     playMenuClick() {
@@ -68,10 +70,26 @@ window.audioFX = {
         this.createTone(1046.50, now + 0.24, 0.25);
     },
 
+    playPeekTick() {
+        this.init();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1000, this.ctx.currentTime);
+        gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.08);
+    },
+
     playGoat() {
-        if (!this.goatAudio) this.goatAudio = new Audio('assets/messisound.mp3');
+        if (!this.goatAudio) {
+            this.goatAudio = new Audio('assets/messisound.mp3');
+        }
         this.goatAudio.currentTime = 0;
-        this.goatAudio.play().catch(e => console.log('Sonido de cabra no disponible'));
+        this.goatAudio.play().catch(e => console.log('Sonido de cabra no disponible:', e));
     },
 
     createTone(freq, startTime, duration) {

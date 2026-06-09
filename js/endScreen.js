@@ -1,4 +1,17 @@
 window.endScreen = {
+    init() {
+        document.getElementById('btn-replay').addEventListener('click', () => {
+            this.hide();
+            window.modes.setupModeRules();
+            window.board.generate();
+            window.board.startPeek();
+        });
+
+        document.getElementById('btn-home').addEventListener('click', () => {
+            window.menu.switchScreenToMenu();
+        });
+    },
+
     show() {
         const state = window.gameState;
         window.timer.clearInterval();
@@ -61,6 +74,7 @@ window.endScreen = {
 
         document.getElementById('screen-end').classList.remove('hidden');
     },
+
     hide() {
         document.getElementById('screen-end').classList.add('hidden');
     }

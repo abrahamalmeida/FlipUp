@@ -18,27 +18,56 @@ window.achievements = {
 
     checkDuringGame(matchedIcon) {
         const state = window.gameState;
-        if (state.pairsFound === 1 && !state.unlockedAchievements.has('first_step')) this.unlock('first_step');
-        if (state.currentStreak === 3 && !state.unlockedAchievements.has('hot_streak')) this.unlock('hot_streak');
-        if (state.pairsFound === 1 && state.movesCount === 1 && !state.unlockedAchievements.has('no_hesitation')) this.unlock('no_hesitation');
-        if (matchedIcon === '🐐' && state.currentTheme === 'futbol' && !state.unlockedAchievements.has('messi')) this.unlock('messi');
-        if (state.currentStreak === 10 && !state.unlockedAchievements.has('rey_tablero')) this.unlock('rey_tablero');
-        if (state.currentFailStreak === 5 && !state.unlockedAchievements.has('cold_streak')) this.unlock('cold_streak');
+
+        if (state.pairsFound === 1 && !state.unlockedAchievements.has('first_step')) {
+            this.unlock('first_step');
+        }
+        if (state.currentStreak === 3 && !state.unlockedAchievements.has('hot_streak')) {
+            this.unlock('hot_streak');
+        }
+        if (state.pairsFound === 1 && state.movesCount === 1 && !state.unlockedAchievements.has('no_hesitation')) {
+            this.unlock('no_hesitation');
+        }
+        if (matchedIcon === '🐐' && state.currentTheme === 'futbol' && !state.unlockedAchievements.has('messi')) {
+            this.unlock('messi');
+        }
+        if (state.currentStreak === 10 && !state.unlockedAchievements.has('rey_tablero')) {
+            this.unlock('rey_tablero');
+        }
+        if (state.currentFailStreak === 5 && !state.unlockedAchievements.has('cold_streak')) {
+            this.unlock('cold_streak');
+        }
     },
 
     checkAtEnd() {
         const state = window.gameState;
-        if (state.difficulty === 'easy' && state.mode === 'solitario' && !state.timedOut && state.timeSeconds < 30 && !state.unlockedAchievements.has('speedster')) this.unlock('speedster');
-        if (state.mistakesCount === 0 && !state.unlockedAchievements.has('perfect_game')) this.unlock('perfect_game');
-        if (state.mistakesCount === 0 && state.difficulty === 'hard' && !state.unlockedAchievements.has('perfect_hard')) this.unlock('perfect_hard');
+        if (state.difficulty === 'easy' && state.mode === 'solitario' && !state.timedOut && state.timeSeconds < 30 && !state.unlockedAchievements.has('speedster')) {
+            this.unlock('speedster');
+        }
+        if (state.mistakesCount === 0 && !state.unlockedAchievements.has('perfect_game')) {
+            this.unlock('perfect_game');
+        }
+        if (state.mistakesCount === 0 && state.difficulty === 'hard' && !state.unlockedAchievements.has('perfect_hard')) {
+            this.unlock('perfect_hard');
+        }
         if (state.mode === 'pvp') {
             const diff = Math.abs(state.p1Pairs - state.p2Pairs);
-            if (diff === 1 && !state.unlockedAchievements.has('duelo_titanes')) this.unlock('duelo_titanes');
-            if (state.p1Pairs === state.p2Pairs && state.pairsFound === state.totalPairsInBoard && !state.unlockedAchievements.has('empate_perfecto')) this.unlock('empate_perfecto');
+            if (diff === 1 && !state.unlockedAchievements.has('duelo_titanes')) {
+                this.unlock('duelo_titanes');
+            }
+            if (state.p1Pairs === state.p2Pairs && state.pairsFound === state.totalPairsInBoard && !state.unlockedAchievements.has('empate_perfecto')) {
+                this.unlock('empate_perfecto');
+            }
         }
-        if (state.currentTheme === 'animales' && !state.unlockedAchievements.has('zoo')) this.unlock('zoo');
-        if (state.currentTheme === 'memes' && !state.unlockedAchievements.has('meme_lord')) this.unlock('meme_lord');
-        if (state.resetCount < 2 && !state.unlockedAchievements.has('observador')) this.unlock('observador');
+        if (state.currentTheme === 'animales' && !state.unlockedAchievements.has('zoo')) {
+            this.unlock('zoo');
+        }
+        if (state.currentTheme === 'memes' && !state.unlockedAchievements.has('meme_lord')) {
+            this.unlock('meme_lord');
+        }
+        if (state.resetCount < 2 && !state.unlockedAchievements.has('observador')) {
+            this.unlock('observador');
+        }
     },
 
     unlock(id) {
@@ -63,13 +92,23 @@ window.achievements = {
         if (!container) return;
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.innerHTML = `<div class="icon">${ach.icon}</div><div class="content"><h5>¡Logro Desbloqueado!</h5><p>${ach.title}</p></div>`;
+        toast.innerHTML = `
+            <div class="icon">${ach.icon}</div>
+            <div class="content">
+                <h5>¡Logro Desbloqueado!</h5>
+                <p>${ach.title}</p>
+            </div>
+        `;
         container.appendChild(toast);
-        setTimeout(() => { toast.remove(); }, 4000);
+        setTimeout(() => {
+            toast.style.animation = 'fadeIn 0.3s ease-out reverse forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
     },
 
     resetSession() {
         window.gameState.unlockedAchievements.clear();
-        document.getElementById('sidebar-achievements-list').innerHTML = '';
+        const sidebarList = document.getElementById('sidebar-achievements-list');
+        if (sidebarList) sidebarList.innerHTML = '';
     }
 };

@@ -7,26 +7,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="theme-futbol">
+
+    <div class="toast-container" id="achievement-toast-container"></div>
+
     <main class="app-container">
+
         <section class="view-section" id="screen-menu">
             <header class="brand-header">
                 <h1 class="logo-text">Flip<span>Up</span></h1>
                 <p class="subtitle">Entrena tu mente de forma divertida</p>
             </header>
+
             <div class="config-card">
                 <form id="config-form">
                     <div class="form-group">
                         <label for="select-mode">Modo de Juego</label>
                         <select id="select-mode">
                             <option value="solitario">Clásico (Cronómetro)</option>
-                            <option value="contrareloj">Contrarreloj Extremo</option>
+                            <option value="contrareloj">Contrarreloj Extremo (¡El tiempo baja!)</option>
                             <option value="pvp">Versus (1 vs 1)</option>
-                            <option value="practica">Práctica Libre</option>
+                            <option value="practica">Práctica Libre (Sin presión)</option>
                         </select>
                     </div>
+
                     <div class="form-group row-inputs">
                         <div class="input-field">
                             <label for="input-p1">Jugador 1</label>
@@ -37,32 +44,44 @@
                             <input type="text" id="input-p2" value="Jugador 2" autocomplete="off">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label>Dificultad</label>
                         <div class="radio-cards-group">
                             <label class="radio-card">
-                                <input type="checkbox" name="difficulty" value="easy" checked>
-                                <div class="card-box"><span class="title">Fácil</span><span class="desc">4x4</span></div>
+                                <input type="checkbox" name="difficulty" value="easy" checked onclick="this.form.difficulty.forEach(c => c !== this ? c.checked = false : null)">
+                                <div class="card-box">
+                                    <span class="title">Fácil</span>
+                                    <span class="desc">4x4 (16 cartas)</span>
+                                </div>
                             </label>
                             <label class="radio-card">
-                                <input type="checkbox" name="difficulty" value="medium">
-                                <div class="card-box"><span class="title">Medio</span><span class="desc">6x6</span></div>
+                                <input type="checkbox" name="difficulty" value="medium" onclick="this.form.difficulty.forEach(c => c !== this ? c.checked = false : null)">
+                                <div class="card-box">
+                                    <span class="title">Medio</span>
+                                    <span class="desc">6x6 (36 cartas)</span>
+                                </div>
                             </label>
                             <label class="radio-card">
-                                <input type="checkbox" name="difficulty" value="hard">
-                                <div class="card-box"><span class="title">Difícil</span><span class="desc">8x8</span></div>
+                                <input type="checkbox" name="difficulty" value="hard" onclick="this.form.difficulty.forEach(c => c !== this ? c.checked = false : null)">
+                                <div class="card-box">
+                                    <span class="title">Difícil</span>
+                                    <span class="desc">8x8 (64 cartas)</span>
+                                </div>
                             </label>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label>Temática</label>
+                        <label>Temática del Juego</label>
                         <div class="theme-selector-grid">
-                            <button type="button" class="theme-btn active" data-theme="futbol">🏆 Mundial</button>
+                            <button type="button" class="theme-btn active" data-theme="futbol">🏆 Mundial 2026</button>
                             <button type="button" class="theme-btn" data-theme="animales">🐾 Animales</button>
                             <button type="button" class="theme-btn" data-theme="memes">😂 Memes</button>
                         </div>
                     </div>
-                    <button type="submit" class="btn-primary">¡Comenzar Partida!</button>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 10px;">¡Comenzar Partida!</button>
                 </form>
             </div>
         </section>
@@ -80,6 +99,7 @@
                         <span class="p-score" id="dash-score-p2">Pares: 0</span>
                     </div>
                 </div>
+
                 <div class="dash-right">
                     <div class="stat-indicator" id="stat-timer-box">
                         <span class="label" id="timer-label">Tiempo</span>
@@ -97,6 +117,7 @@
                 <div class="board-wrapper">
                     <div class="board" id="game-board"></div>
                 </div>
+
                 <aside class="achievements-sidebar">
                     <h3>🏆 Logros Obtenidos</h3>
                     <ul id="sidebar-achievements-list"></ul>
@@ -107,35 +128,47 @@
         <div class="modal-overlay hidden" id="screen-end">
             <div class="modal-card">
                 <h2 id="end-title">¡Fin de la Partida!</h2>
-                <p class="winner-announcement" id="end-subtitle"></p>
+                <p class="winner-announcement" id="end-subtitle">Completaste el juego con éxito</p>
+
                 <div class="stats-summary-grid">
-                    <div class="summary-item"><span class="val" id="end-stat-moves">0</span><span class="label">Intentos</span></div>
-                    <div class="summary-item" id="end-box-time"><span class="val" id="end-stat-time">00:00</span><span class="label">Tiempo</span></div>
-                    <div class="summary-item"><span class="val" id="end-stat-accuracy">0%</span><span class="label">Precisión</span></div>
+                    <div class="summary-item">
+                        <span class="val" id="end-stat-moves">0</span>
+                        <span class="label">Intentos</span>
+                    </div>
+                    <div class="summary-item id-box" id="end-box-time">
+                        <span class="val" id="end-stat-time">00:00</span>
+                        <span class="label" id="end-label-time">Tiempo</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="val" id="end-stat-accuracy">0%</span>
+                        <span class="label">Precisión</span>
+                    </div>
                 </div>
+
                 <div class="end-achievements-section">
                     <h4>Medallas Conseguidas</h4>
                     <div class="badges-row" id="end-achievements-container"></div>
                 </div>
+
                 <div class="modal-footer">
-                    <button class="btn-secondary" id="btn-home">Menú Principal</button>
-                    <button class="btn-primary" id="btn-replay">Volver a Jugar</button>
+                    <button class="btn-secondary" id="btn-home" style="flex:1;">Menú Principal</button>
+                    <button class="btn-primary" id="btn-replay" style="flex:1.5;">Volver a Jugar</button>
                 </div>
             </div>
         </div>
-    </main>
 
-    <div class="toast-container" id="achievement-toast-container"></div>
+    </main>
 
     <script src="js/app.js"></script>
     <script src="js/themes.js"></script>
+    <script src="js/audio.js"></script>
     <script src="js/timer.js"></script>
-    <script src="js/modes.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/menu.js"></script>
     <script src="js/dashboard.js"></script>
+    <script src="js/modes.js"></script>
     <script src="js/board.js"></script>
     <script src="js/game.js"></script>
-    <script src="js/achievements.js"></script>
     <script src="js/endScreen.js"></script>
-    <script src="js/menu.js"></script>
 </body>
 </html>
