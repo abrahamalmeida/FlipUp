@@ -4,6 +4,7 @@ window.menu = {
         const selectMode = document.getElementById('select-mode');
         const fieldP2 = document.getElementById('field-p2');
         const themeButtons = document.querySelectorAll('.theme-btn');
+        const logoUp = document.querySelector('.logo-text span');
 
         selectMode.addEventListener('change', (e) => {
             window.audioFX.playMenuClick();
@@ -22,6 +23,12 @@ window.menu = {
                 btn.classList.add('active');
                 const selectedTheme = btn.getAttribute('data-theme');
                 window.themes.applyTheme(selectedTheme);
+
+                if (logoUp) {
+                    logoUp.classList.remove('bounce');
+                    void logoUp.offsetWidth;
+                    logoUp.classList.add('bounce');
+                }
             });
         });
 
